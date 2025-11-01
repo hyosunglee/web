@@ -1,0 +1,161 @@
+.concept-graph {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.concept-graph__header {
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.concept-graph__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.concept-graph__subtitle {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.concept-graph__container {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-xl);
+  align-items: flex-start;
+}
+
+.concept-graph__svg {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+}
+
+.concept-graph__connections line {
+  transition: stroke var(--transition-fast);
+}
+
+.concept-graph__node {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.concept-graph__node rect {
+  fill: var(--color-bg-secondary);
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  transition: all var(--transition-fast);
+}
+
+.concept-graph__node:hover rect {
+  fill: var(--color-primary);
+  transform: scale(1.05);
+}
+
+.concept-graph__node:hover text {
+  fill: white;
+}
+
+.concept-graph__node--active rect {
+  fill: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.concept-graph__node--active text {
+  fill: white;
+  font-weight: 700;
+}
+
+.concept-graph__node-label {
+  font-size: 16px;
+  font-weight: 600;
+  fill: var(--color-text);
+  transition: fill var(--transition-fast);
+}
+
+.concept-graph__node-sublabel {
+  font-size: 12px;
+  fill: var(--color-text-secondary);
+  transition: fill var(--transition-fast);
+}
+
+.concept-graph__info {
+  flex: 0 0 300px;
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.concept-graph__info-header {
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.concept-graph__info-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-xs);
+}
+
+.concept-graph__info-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.concept-graph__info-description {
+  color: var(--color-text);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-md);
+}
+
+.concept-graph__info-close {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.concept-graph__info-close:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 1024px) {
+  .concept-graph__container {
+    flex-direction: column;
+  }
+
+  .concept-graph__info {
+    flex: 1;
+    width: 100%;
+  }
+}
