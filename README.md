@@ -71,3 +71,7 @@ export default defineConfig([
   },
 ])
 ```
+
+## AGI Prototype Design Document
+
+For teams exploring 지속 활동성 AGI 프로토타입 실험, see [`docs/agi_prototype_design.md`](docs/agi_prototype_design.md). It summarizes the required Python 모듈 구성, 테스트 전략, 그리고 Codex/Jules 작업 지침을 포함합니다.
