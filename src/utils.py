@@ -21,7 +21,7 @@ def validate_topic(topic: str, minimum_length: int = 2) -> str:
         raise TypeError("topic must be a string")
 
     normalized: str = topic.strip()
-    if len(normalized) < minimum_length:
+    if text_length(normalized) < minimum_length:
         raise ValueError("topic must be at least 2 characters long")
 
     return normalized

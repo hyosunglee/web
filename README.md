@@ -17,7 +17,12 @@ python src/agent.py
 ## Run HS 시스템 사고법 분석 프로그램
 
 ```bash
+# PYTHONPATH를 설정하거나 -m 옵션을 사용하여 실행합니다.
+export PYTHONPATH=$PYTHONPATH:.
 python src/main.py "분석할 주제"
+
+# 또는
+python -m src.main "분석할 주제"
 ```
 
 출력에는 다음이 포함됩니다.
