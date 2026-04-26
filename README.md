@@ -8,11 +8,22 @@
 pip install -r requirements.txt
 ```
 
-## Run
+## Run Existing Prototype
 
 ```bash
 python src/agent.py
 ```
+
+## Run HS 시스템 사고법 분석 프로그램
+
+```bash
+python src/main.py "분석할 주제"
+```
+
+출력에는 다음이 포함됩니다.
+- 주제에 맞춰 선택된 사고법 2가지
+- 1,500자 이상 분석 요약
+- 300자 이상 아이디어 10개 이상
 
 ## Test
 
