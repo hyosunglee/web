@@ -1,0 +1,116 @@
+# Self-Learning Feedback Loop API
+
+## Overview
+This project is an AI-powered self-learning feedback loop system that automatically collects research papers from ArXiv, trains machine learning models, and makes predictions. The system continuously improves itself through a feedback loop.
+
+## Recent Changes (January 9, 2026)
+- ✅ **시스템 재구축 완료** (최신 업데이트!)
+  - Flask → FastAPI/uvicorn 마이그레이션 완료
+  - models/ 패키지 구조화 (classifier.py, summarizer.py, feedback_trainer.py)
+  - generate_paper_summary() 함수 수정: max_length + max_new_tokens 지원
+  - 자동 생성 파이프라인 정상 작동 확인 (5/5 성공)
+  - 최신 결과: 196개 예측, 136개 고신뢰도(80%+), 5개 GPT-2 요약 생성
+
+## Changes (December 17, 2025)
+- ✅ **자동 예측→생성 파이프라인**
+  - 학습 완료 후 자동으로 전체 데이터 예측 실행
+  - 고신뢰도(80%+) 예측 상위 5개에 GPT-2 요약 자동 생성
+  - 결과 저장: results/prediction_*.json, results/generated_*.json
+  - VirtueEngine 연동: 복잡성 기반 덕목(wisdom) 부스팅
+
+## Changes (November 17, 2025)
+- ✅ **정렬 방식 번갈아 사용 시스템**
+  - 키워드마다 관련성순 ↔ 최신순 자동 전환
+  - 짝수 번째: 관련성순 → 중요한 이전 논문 수집
+  - 홀수 번째: 최신순 → 최신 논문 수집
+  - 예: RL (관련성) → DL (최신) → NN (관련성) → CV (최신)...
+- ✅ **ArXiv API 수집 시스템 완전 개선**
+  - 구버전 .results() → 새로운 Client API로 전환
+  - 상세한 에러 로깅 추가 (실시간 수집 상태 확인 가능)
+  - Retry 로직 구현 (3번 재시도, 지수 백오프)
+  - 타임아웃 및 Rate Limit 처리 강화
+  - 개별 논문 파싱 오류도 gracefully 처리
+- ✅ 다양한 논문 수집 시스템 구축 완료
+- ✅ 10개 AI 주제 키워드 순환 시스템 (reinforcement learning, deep learning, computer vision 등)
+- ✅ 논문 수집량 증가: 10개 → 30개 (3배 증가)
+- ✅ 실제 ArXiv 논문: 33개 → 63개 (관련성순 검색으로 30개 추가)
+- ✅ 자동화 스케줄러 작동 중 (1시간마다 다른 주제로 수집)
+- ✅ 중복 체크 시스템 정상 작동 (이미 수집된 논문은 자동으로 필터링)
+
+## Project Architecture
+- **Backend**: FastAPI + uvicorn (포트 3000)
+- **ML Stack**: scikit-learn (TF-IDF + Logistic Regression) + GPT-2 (텍스트 생성)
+- **Data Storage**: JSONL format for logs and experiments
+- **Model Management**: Versioned models with symlink to latest
+
+### Key Components
+- `server.py` - FastAPI 서버 실행 (uvicorn)
+- `api/main.py` - FastAPI 앱 및 라우터 설정
+- `api/routes/legacy.py` - 모든 API 엔드포인트
+- `models/classifier.py` - 분류 모델 로직
+- `models/summarizer.py` - GPT-2 텍스트 생성
+- `utils/loop_logic.py` - 피드백 루프 + 자동 생성 파이프라인
+- `utils/paper_fetcher.py` - ArXiv 논문 수집
+
+## API Endpoints
+- `GET /` - Health check
+- `GET /healthz` - Service status
+- `POST /seed?n=N` - Generate N test log entries
+- `POST /train` - Train model based on collected logs
+- `POST /predict` - Make predictions on new text
+- `POST /ingest` - Add new data to the system
+- `POST /loop` - Execute one cycle of the feedback loop
+- `POST /check_duplicates` - Check for duplicate paper titles
+
+## Running the Project
+The server runs automatically on port 5000 via the configured workflow with webview enabled.
+
+### Web UI
+Open the webview pane to access the interactive web interface where you can:
+- Check server status
+- Generate test data
+- Train models
+- Make predictions
+- Add new data
+- Check for duplicates
+
+All features are accessible through an easy-to-use web interface with buttons and forms.
+
+### Manual Commands
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run server
+PORT=3000 python server.py
+
+# Generate test data
+curl -X POST "http://localhost:3000/seed?n=30"
+
+# Train model
+curl -X POST http://localhost:3000/train
+
+# Make prediction
+curl -X POST http://localhost:3000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text":"New RL idea...", "target":"reward", "explain":true}'
+```
+
+## Current State
+- ✅ 완전 자동화 시스템 작동 중
+- ✅ 포트 3000에서 서버 실행
+- ✅ 1시간마다 자동 논문 수집
+- ✅ 6시간마다 자동 모델 재학습
+- ✅ 모든 결과 JSON 파일로 자동 저장
+- ✅ results/ 폴더에 결과 저장
+
+## User Preferences
+- Language: Korean and English mixed
+- Development environment: Replit
+- Port: 5000 (Web UI + API server)
+- Interface: Web UI for easy interaction
+
+## Files Added
+- `static/index.html` - Interactive web UI for all API functions
+- `test_api.py` - Python script to test all API endpoints
+- `QUICKSTART.md` - Korean quickstart guide

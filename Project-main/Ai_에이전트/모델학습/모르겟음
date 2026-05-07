@@ -1,0 +1,64 @@
+좋아, PR 스타일 패치로 딱 핵심 3가지만 넣었어—Predict API + 모델 버저닝/심링크 + (옵션) 간단 설명 스텁.
+아래 diff들 그대로 적용하면 바로 /predict API 쓸 수 있어.
+
+
+#4 의존성 업데이트
+
+*** a/requirements.txt
+--- b/requirements.txt
+@@
+ flask
+ scikit-learn
+ joblib
+ pandas
++pydantic>=2
+ apscheduler
+
+
+⸻
+
+사용법 스모크 테스트
+
+# 1) 학습 (reward 이진분류 가정)
+curl -X POST http://localhost:3000/train
+
+# 2) 예측
+curl -X POST http://localhost:3000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"text":"새로운 RL 아이디어와 실험 요약...", "target":"reward", "explain":true}'
+
+예상 응답
+
+{
+  "target": "reward",
+  "prediction": 1.0,
+  "proba": 0.82,
+  "model_version": "reward_cls_20250802-153012.pkl",
+  "explanation": "[stub] reward=1.000. 핵심토픽: ..."
+}
+
+
+⸻
+
+이번 PR 핵심 3가지 (딱 의미 있는 것만)
+	1.	/predict API: 스키마 검증(Pydantic) + 타깃 라우팅 + 불확실성 반환
+	2.	모델 버저닝/심링크: 운영 롤백/추적 쉬움 (*_latest.pkl)
+	3.	설명 스텁: GPT‑5 설명 연동 자리 확보(지금은 경량 스텁)
+
+필요하면 회귀 타깃(accuracy) 학습 루틴도 같은 방식으로 바로 추가해줄게.
+
+# web/data
+flask
+requests
+beautifulsoup4
+
+# ml core
+numpy
+scipy
+pandas
+scikit-learn
+joblib
+
+# api schema & scheduler
+pydantic>=2
+apscheduler
