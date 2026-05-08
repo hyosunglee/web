@@ -1,6 +1,6 @@
 """Tests for analysis engine module."""
 
-from src.analysis_engine import AnalysisEngine
+from packages.agi_core.analysis_engine import AnalysisEngine
 
 
 def test_select_methods_returns_two_methods() -> None:

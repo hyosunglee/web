@@ -1,4 +1,4 @@
-from src.world_model import WorldModel
+from packages.agi_core.world_model import WorldModel
 
 
 def test_world_model_predict_shapes() -> None:

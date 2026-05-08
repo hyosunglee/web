@@ -1,6 +1,6 @@
 """Tests for orchestration entry point."""
 
-from src.main import run
+from apps.web.main import run
 
 
 def test_run_returns_expected_structure() -> None:

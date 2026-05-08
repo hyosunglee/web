@@ -1,4 +1,4 @@
-from src.self_query import SelfQueryEngine
+from packages.agi_core.self_query import SelfQueryEngine
 
 
 def test_generate_questions_from_metrics() -> None:

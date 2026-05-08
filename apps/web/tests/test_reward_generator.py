@@ -1,4 +1,4 @@
-from src.reward_generator import RewardGenerator
+from packages.agi_core.reward_generator import RewardGenerator
 
 
 def test_compute_reward_weighted_sum() -> None:

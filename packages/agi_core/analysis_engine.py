@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from src.utils import text_length, validate_topic
+from packages.agi_core.utils import text_length, validate_topic
 
 
 @dataclass(frozen=True)

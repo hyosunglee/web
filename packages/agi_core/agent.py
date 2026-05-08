@@ -13,11 +13,11 @@ if __package__ in (None, ""):
 
     sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from src.memory import Episode, EpisodicMemory, SemanticMemory, WorkingMemory
-from src.reward_generator import RewardGenerator
-from src.self_query import SelfQueryEngine
-from src.state_updater import StateUpdater
-from src.world_model import WorldModel
+from packages.agi_core.memory import Episode, EpisodicMemory, SemanticMemory, WorkingMemory
+from packages.agi_core.reward_generator import RewardGenerator
+from packages.agi_core.self_query import SelfQueryEngine
+from packages.agi_core.state_updater import StateUpdater
+from packages.agi_core.world_model import WorldModel
 
 
 @dataclass

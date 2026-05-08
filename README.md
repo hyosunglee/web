@@ -1,37 +1,39 @@
-# Continuous-Activity AGI Prototype
+# Monorepo Overview
 
-지속적인 내부 활동성(Continuous Internal Activity)을 갖춘 AGI 프로토타입입니다.
+이 저장소는 실행 가능한 앱(`apps/`)과 공유 라이브러리(`packages/`)를 분리한 모노레포입니다.
 
-## Setup
+## Directory Layout
 
-```bash
-pip install -r requirements.txt
-```
+- `apps/web` — 기존 AGI 프로토타입 실행 엔트리 및 테스트
+- `apps/api` — FastAPI 기반 API 서버
+- `apps/paper_assistant` — 논문 수집/루프 실행 앱
+- `apps/active_agent` — active monitoring agent
+- `packages/agi_core` — 공유 AGI 코어 모듈
+- `docs` — 아키텍처/마이그레이션/작업 지침
+- `tests/integration` — 크로스 앱 통합 테스트 자리
 
-## Run Existing Prototype
+## Standard Run Commands
 
-```bash
-python src/agent.py
-```
+| App | Command |
+|---|---|
+| web prototype | `python -m apps.web.main "분석할 주제"` |
+| AGI agent loop | `python -m packages.agi_core.agent` |
+| API server | `python apps/api/main.py` |
+| paper assistant loop | `python apps/paper_assistant/main.py` |
+| active agent | `python apps/active_agent/src/main.py` |
 
-## Run HS 시스템 사고법 분석 프로그램
+## Standard Test Commands
 
-```bash
-# PYTHONPATH를 설정하거나 -m 옵션을 사용하여 실행합니다.
-export PYTHONPATH=$PYTHONPATH:.
-python src/main.py "분석할 주제"
+| Scope | Command |
+|---|---|
+| web + agi_core unit tests | `pytest apps/web/tests` |
+| integration (placeholder) | `pytest tests/integration` |
 
-# 또는
-python -m src.main "분석할 주제"
-```
+## Dependency Files
 
-출력에는 다음이 포함됩니다.
-- 주제에 맞춰 선택된 사고법 2가지
-- 1,500자 이상 분석 요약
-- 300자 이상 아이디어 10개 이상
+- `requirements.txt` (repo-level minimal tooling)
+- `apps/api/requirements.txt`
+- `apps/paper_assistant/requirements.txt`
+- `apps/active_agent/src/requirements.txt`
 
-## Test
-
-```bash
-pytest
-```
+상세 충돌/중복 의존성은 `docs/dependency_todo.md`를 참고하세요.
