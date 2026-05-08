@@ -1,4 +1,4 @@
-from src.state_updater import StateUpdater
+from packages.agi_core.state_updater import StateUpdater
 
 
 def test_state_updater_updates_without_input() -> None:

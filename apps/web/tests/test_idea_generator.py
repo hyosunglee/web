@@ -1,7 +1,7 @@
 """Tests for creative idea generator."""
 
-from src.analysis_engine import AnalysisEngine
-from src.idea_generator import IdeaGenerator
+from packages.agi_core.analysis_engine import AnalysisEngine
+from packages.agi_core.idea_generator import IdeaGenerator
 
 
 def test_generate_ideas_count_is_at_least_ten() -> None:

@@ -1,4 +1,4 @@
-from src.agent import AGIAgent
+from packages.agi_core.agent import AGIAgent
 
 
 def test_agent_runs_without_external_input() -> None:

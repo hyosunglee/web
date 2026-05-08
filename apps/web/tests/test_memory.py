@@ -1,6 +1,6 @@
 import tempfile
 
-from src.memory import Episode, EpisodicMemory, InMemoryStore, SemanticMemory, WorkingMemory
+from packages.agi_core.memory import Episode, EpisodicMemory, InMemoryStore, SemanticMemory, WorkingMemory
 
 
 def test_working_memory_fifo_behavior() -> None:

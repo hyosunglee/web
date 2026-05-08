@@ -5,9 +5,9 @@ from __future__ import annotations
 from argparse import ArgumentParser
 from typing import Any
 
-from src.analysis_engine import AnalysisEngine
-from src.idea_generator import generate_topic_aware_ideas
-from src.utils import validate_topic
+from packages.agi_core.analysis_engine import AnalysisEngine
+from packages.agi_core.idea_generator import generate_topic_aware_ideas
+from packages.agi_core.utils import validate_topic
 
 
 def run(topic: str) -> dict[str, Any]:
