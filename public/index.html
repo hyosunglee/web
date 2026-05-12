@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Ops Visualization MVP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <main class="layout">
+      <header class="hero">
+        <p class="eyebrow">Research to PR Automation</p>
+        <h1>Agent Operation Visualization</h1>
+        <p class="subtitle">
+          spec → plan → build → test → review → ship 라이프사이클을 한 화면에서 관측하는 MVP
+        </p>
+        <div class="hero-actions">
+          <button id="refreshBtn" class="btn btn-secondary">새로고침</button>
+          <button id="ingestBtn" class="btn btn-secondary">논문 수집</button>
+          <button id="createPrBtn" class="btn btn-secondary">선택 태스크 PR 생성</button>
+          <button id="tickBtn" class="btn btn-primary">시뮬레이션 진행</button>
+        </div>
+      </header>
+
+      <section class="panel" aria-labelledby="dashboard-title">
+        <div class="panel-title-row">
+          <h2 id="dashboard-title">Home Dashboard</h2>
+          <span id="lastUpdated" class="muted"></span>
+        </div>
+        <div id="metricsGrid" class="metrics-grid"></div>
+        <div id="alerts" class="alerts"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="pipeline-title">
+        <h2 id="pipeline-title">Pipeline Board</h2>
+        <div id="pipelineBoard" class="pipeline-board"></div>
+      </section>
+
+      <section class="two-col">
+        <article class="panel" aria-labelledby="timeline-title">
+          <div class="panel-title-row">
+            <h2 id="timeline-title">Task Timeline</h2>
+            <select id="taskSelector"></select>
+          </div>
+          <div id="timelineMeta" class="timeline-meta"></div>
+          <ul id="timelineList" class="timeline-list"></ul>
+        </article>
+
+        <article class="panel" aria-labelledby="agent-title">
+          <h2 id="agent-title">Agent Status</h2>
+          <ul id="agentList" class="agent-list"></ul>
+        </article>
+      </section>
+
+      <section class="panel" aria-labelledby="pr-title">
+        <h2 id="pr-title">PR List</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Repository</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Task</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody id="prTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <template id="metricTemplate">
+      <article class="metric-card">
+        <p class="metric-label"></p>
+        <p class="metric-value"></p>
+      </article>
+    </template>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>
